@@ -1,9 +1,12 @@
 Railscasts::Application.routes.draw do
+  get "admin/add_moderator"
+
   root :to => "episodes#index"
 
 	get   '/login', :to => 'users#new', :as => :login
 	match '/auth/:provider/callback', :to => 'users#create'
 	match '/auth/failure', :to => 'users#failure'
+	match '/admin/add', :to => 'admin#add_moderator'
 
   #match "/auth/:provider/callback", :to => "users#create"
   match "about" => "info#about", :as => "about"

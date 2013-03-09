@@ -20,8 +20,9 @@
 
 			<div class="user_nav">
 				<% if $user %>
-					<%= $user.name %>
-					<a href="/logout">Log out</a>
+					Logged in as 
+					<%= link_to $user.name, "/users/#{$user.id}" %> | 
+					<a href="/logout">Log Out</a>
 				<% else %>
 					<a href="/auth/facebook">Log in with Facebook</a>
 				<% end %>
