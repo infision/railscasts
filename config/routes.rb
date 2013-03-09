@@ -7,6 +7,8 @@ Railscasts::Application.routes.draw do
 	match '/auth/:provider/callback', :to => 'users#create'
 	match '/auth/failure', :to => 'users#failure'
 	match '/admin/add', :to => 'admin#add_moderator'
+	match '/user/:id/make_moderator' => 'users#make_moderator', :as => :make_moderator
+	match '/user/:id/remove_moderator' => 'users#remove_moderator', :as => :remove_moderator
 
   #match "/auth/:provider/callback", :to => "users#create"
   match "about" => "info#about", :as => "about"

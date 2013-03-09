@@ -5,14 +5,6 @@ class UsersController < ApplicationController
   def show
   end
 
- # def create
- #   omniauth = request.env["omniauth.auth"]
- #   logger.info omniauth.inspect
- #   @user = User.find_by_github_uid(omniauth["uid"]) || User.create_from_omniauth(omniauth)
- #   cookies.permanent[:token] = @user.token
- #   redirect_to_target_or_default root_url, :notice => "Signed in successfully"
- # end
-
   def edit
   end
 
@@ -56,8 +48,6 @@ class UsersController < ApplicationController
     redirect_to root_url, :notice => "You have been unsubscribed from further email notifications."
   end
 
- # Infision
-	
 	def new
 	end
 
@@ -75,6 +65,16 @@ class UsersController < ApplicationController
 	end
 
 	def failure
+	end
+
+	def make_moderator
+		@user.update_attribute(:moderator, true)
+		redirect_to root_url, :notice => "#{@user.name} is now moderator."
+	end
+
+	def remove_moderator
+		@user.update_attribute(:moderator, false)
+		redirect_to root_url, :notice => "#{@user.name} is no longer moderator."
 	end
 
   private

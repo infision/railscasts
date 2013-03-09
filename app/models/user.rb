@@ -44,4 +44,8 @@ class User < ActiveRecord::Base
     banned_at
   end
 
+	def make_moderator
+		self.moderator = true
+	end
+
 end
