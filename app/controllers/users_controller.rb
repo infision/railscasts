@@ -22,10 +22,10 @@ class UsersController < ApplicationController
     redirect_to @user, :notice => "Successfully updated profile."
   end
 
-  def login
+  def login uid
     session[:return_to] = params[:return_to] if params[:return_to]
     if Rails.env.development?
-      cookies.permanent[:token] = User.first.token
+      cookies.permanent[:token] = User.find(:all, :conditions => {:uid => uid}).first.token
       redirect_to_target_or_default root_url, :notice => "Signed in successfully"
     else
       redirect_to "/auth/facebook"
@@ -71,7 +71,7 @@ class UsersController < ApplicationController
 			user.authorizations.build :provider => auth_hash["provider"], :uid => auth_hash["uid"]
 			user.save
 		end
-		login
+		login auth_hash[:uid]
 	end
 
 	def failure

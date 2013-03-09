@@ -21,7 +21,7 @@
 			<div class="user_nav">
 				<% if $user %>
 					Logged in as 
-					<%= link_to $user.name, "/users/#{$user.id}" %> | 
+					<%= link_to $user.display_name, "/users/#{$user.id}" %> | 
 					<a href="/logout">Log Out</a>
 				<% else %>
 					<a href="/auth/facebook">Log in with Facebook</a>
