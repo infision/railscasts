@@ -20,6 +20,7 @@ gem "paper_trail"
 gem "omniauth-facebook"
 gem "omniauth-github"
 gem "activerecord-mysql2-adapter"
+gem "rb-readline"
 #/Infision
 
 group :development, :test do

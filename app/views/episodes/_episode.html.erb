@@ -14,6 +14,9 @@
       <%= link_to "Watch Episode", episode_path(episode, :autoplay => true), :class => "watch_button" %>
       <span class="stats">(<%= pluralize (episode.seconds/60).round, "minute" %>, <%= link_to pluralize(episode.comments.size, "comment"), episode_path(episode, :view => "comments") %>)</span>
     </div>
+    <% if can? :edit, :episodes  %>
+      <div class="actions"><%= link_to "Edit",  "episodes/"+episode.position.to_s+"/edit"  %></div>
+    <% end  %>
   </div>
   <div class="clear"></div>
 </div>
