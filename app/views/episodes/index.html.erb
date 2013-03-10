@@ -65,14 +65,24 @@
             <th>Comments</th>
             <th>Duration</th>
             <th>Released</th>
+            <% if can? :edit, :episodes  %>
+              <th>Edit</th>
+            <% end %>
           </tr>
           <% for episode in @episodes %>
             <tr>
               <td><%= episode.position %></td>
-              <td><%= link_to episode.name, episode %></td>
+              <td><%= link_to episode.name, episode %>
+                <% if can? :edit, :episodes  %>
+                  | <%= link_to "Edit", "episodes/"+episode.position.to_s+"/edit" =%>
+                <% end  %>
+              </td>
               <td><%= link_to pluralize(episode.comments.size, "comment"), episode_path(episode, :view => "comments"), :class => "comment_count" %></td>
               <td><%= pluralize (episode.seconds/60).round, "minute" %></td>
               <td><%= episode.published_at.strftime('%b %d, %Y') %></td>
+              <% if can? :edit, :episodes  %>
+                <td><div class="actions"><%= link_to "Edit", "episodes/"+episode.position.to_s+"/edit" %></div></td>
+              <% end  %>
             </tr>
           <% end %>
         </table>
@@ -84,6 +94,9 @@
               <div class="name">
                 #<%= episode.position %>
                 <%= link_to episode.name, episode %>
+                <% if can? :edit, :episodes  %>
+                  <div class="actions"><%= link_to "Edit", "episodes/"+episode.position.to_s+"/edit" %></div>
+                <% end  %>
               </div>
             </div>
           <% end %>
