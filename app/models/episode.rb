@@ -11,8 +11,6 @@ class Episode < ActiveRecord::Base
   scope :recent, order('position DESC')
 
   validates_presence_of :published_at, :name
-  serialize :file_sizes
-
   before_create :set_permalink
 
   # sometimes ThinkingSphinx isn't loaded for rake tasks
@@ -98,18 +96,18 @@ class Episode < ActiveRecord::Base
   end
 
   def duration
-    if seconds
-      min, sec = *seconds.divmod(60)
-      [min, sec.to_s.rjust(2, '0')].join(':')
-    end
+  # if seconds
+  #    min, sec = *seconds.divmod(60)
+  #    [min, sec.to_s.rjust(2, '0')].join(':')
+  #  end
   end
 
-  def duration=(duration)
-    if duration.present?
-      min, sec = *duration.split(':').map(&:to_i)
-      self.seconds = min*60 + sec
-    end
-  end
+#  def duration=(duration)
+#   if duration.present?
+#      min, sec = *duration.split(':').map(&:to_i)
+#      self.seconds = min*60 + sec
+#    end
+#  end
 
   def self.find_by_param!(param)
     find_by_position!(param.to_i)
