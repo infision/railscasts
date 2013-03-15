@@ -2,7 +2,10 @@ require "builder"
 
 module ApplicationHelper
   def textilize(text)
-    CodeFormatter.new(text).to_html.html_safe unless text.blank?
+    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML,
+            :autolink => true, :space_after_headers => true)
+    markdown.render(text).html_safe
+    #CodeFormatter.new(text).to_html.html_safe unless text.blank? deprecated
   end
 
   def tab_link(name, url)

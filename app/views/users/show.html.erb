@@ -9,7 +9,7 @@
     <p><strong>This user is a moderator.</strong></p>
 		<p><%= link_to 'Remove Moderator', remove_moderator_path, :confirm => "Are you sure you want to remove #{@user.name} from moderators?"%>
   <% else %>
-		<% if $user.admin %>
+		<% if @user.admin %>
 			<p><%= link_to 'Make Moderator', make_moderator_path, :confirm => "Are you sure you want to make #{@user.name} moderator?"%> </p>
 		<% end %>
 	<% end %>
